@@ -1,0 +1,35 @@
+{
+  "name": "webchunk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover node_modules/jasmine/bin/jasmine.js",
+    "watch:test": "nodemon --exec \"jasmine\"",
+    "watch:cover": "nodemon --exec \"npm test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newebio/webchunk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/newebio/webchunk/issues"
+  },
+  "homepage": "https://github.com/newebio/webchunk#readme",
+  "dependencies": {
+    "async": "^2.0.1",
+    "cellx": "^1.6.42",
+    "module-require-patch": "^0.2.4"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.13",
+    "fixture2": "0.0.3",
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.4.1",
+    "mock2": "0.0.13",
+    "rewire": "^2.5.2"
+  }
+}
