@@ -21,8 +21,9 @@
   "homepage": "https://github.com/newebio/webchunk#readme",
   "dependencies": {
     "async": "^2.0.1",
-    "cellx": "^1.6.42",
-    "module-require-patch": "^0.2.4"
+    "cellx": "^1.6.44",
+    "node-module-info": "^0.1.4",
+    "rewire": "^2.5.2"
   },
   "devDependencies": {
     "coveralls": "^2.11.13",

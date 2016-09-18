@@ -1,6 +1,7 @@
 var cellx = require('cellx');
 var compile = require('./compile');
 var write = require('./write');
+var watch = require('./watch');
 var resolve = require('./resolve');
 
 module.exports = (files) => {
@@ -23,19 +24,23 @@ function mod(file) {
         return deps() ? createModules() : undefined;
     })
     var allDeps = cellx(() => {
-        var allD = deps() && modules() && modules().every(m => m()) ? deps().concat([].concat.apply([], modules().map(m => m()))) : void 0;
-        return allD;
+        //check if module was compiled and all dependencies also, then generate allDeps
+        return deps() && modules() && modules().every(m => m()) ? deps().concat([].concat.apply([], modules().map(m => m()))) : void 0;
     });
     var writer = cellx(() => {
-        return code() && allDeps();
+        return allDeps() && code();
     });
     writer("subscribe", () => {
-        write(file, code(), allDeps());
+        if (writer())
+            write(file, code(), allDeps());
     });
-    function start() {
+    function _compile() {
         compile(file, (err, code_, deps_) => {
-            code(code_);
-            deps(deps_);
+            setTimeout(function () {
+                code(code_);
+                deps(deps_);
+
+            }, 1);
         })
     }
     function createModules() {
@@ -46,7 +51,10 @@ function mod(file) {
             });
         })
     }
-    start();
+    //Subscribe to change of file
+    watch(file, _compile)
+    //Start first compile    
+    _compile();
     return {
         allDeps: allDeps
     }
