@@ -24,16 +24,16 @@ function mod(file) {
         return deps() ? createModules() : undefined;
     })
     var allDeps = cellx(() => {
+        //console.log("ad", file, modules() ? deps().concat([].concat.apply([], modules().map(m => m()))) : "netu");
         //check if module was compiled and all dependencies also, then generate allDeps
-        return deps() && modules() && modules().every(m => m()) ? deps().concat([].concat.apply([], modules().map(m => m()))) : void 0;
+        return deps() && modules() && modules().every(m => m()) ?
+            deps().concat([].concat.apply([], modules().map(m => m()))) :
+            void 0;
     });
     var writer = cellx(() => {
-        return allDeps() && code();
+        return allDeps() && code() ? write(file, code(), allDeps()) : void 0;
     });
-    writer("subscribe", () => {
-        if (writer())
-            write(file, code(), allDeps());
-    });
+    writer("subscribe", () => { });
     function _compile() {
         compile(file, (err, code_, deps_) => {
             setTimeout(function () {

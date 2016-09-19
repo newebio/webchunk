@@ -38,11 +38,11 @@ describe("Index", () => {
         //Generate file changing
         expect(f("write").calls.count()).toBe(3);
         f("watch").calls.argsFor(2)[1]();
-        jasmine.clock().tick(2);
+        jasmine.clock().tick(100);
         expect(f("write").calls.count()).toBe(7);
         expect(f("write").calls.argsFor(3)).toEqual(["inc3", f("code4"), []]);
         expect(f("write").calls.argsFor(4)).toEqual(["inc2", f("code3"), [f("dep4")]]);
         expect(f("write").calls.argsFor(5)).toEqual(["inc1", f("code2"), [f("dep3"), f("dep4")]]);
-        expect(f("write").calls.argsFor(2)).toEqual(["index", f("code1"), [f("dep1"), f("dep2"), f("dep3"), f("dep4")]]);
+        expect(f("write").calls.argsFor(6)).toEqual(["index", f("code1"), [f("dep1"), f("dep2"), f("dep3"), f("dep4"), f("dep4")]]);
     })
 })
