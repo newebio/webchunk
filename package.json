@@ -21,7 +21,8 @@
   "homepage": "https://github.com/newebio/webchunk#readme",
   "dependencies": {
     "async": "^2.0.1",
-    "cellx": "^1.6.44",
+    "cellx": "^1.6.46",
+    "mock2": "0.0.15",
     "node-module-info": "^0.1.4",
     "rewire": "^2.5.2"
   },
@@ -30,7 +31,7 @@
     "fixture2": "0.0.3",
     "istanbul": "^0.4.5",
     "jasmine": "^2.4.1",
-    "mock2": "0.0.13",
+    "mock2": "^0.0.14",
     "rewire": "^2.5.2"
   }
 }
