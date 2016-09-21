@@ -5,7 +5,7 @@ describe("Index", () => {
     beforeEach(() => {
         f = fixtures();
         jasmine.clock().install();
-        f("index", mock.require("./../index", {
+        f("index", mock.require("./../compile-all", {
             "./../compile": f("compile", jasmine.createSpy()),
             "./../write": f("write", jasmine.createSpy()),
             "./../watch": f("watch", jasmine.createSpy()),
