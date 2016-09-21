@@ -4,7 +4,7 @@ var write = require('./write');
 var watch = require('./watch');
 var resolve = require('./resolve');
 
-module.exports = (files) => {
+module.exports = (files, isWatch, write) => {
     //create cache
     var modules = {};
     //create module for every entry point
@@ -51,8 +51,10 @@ module.exports = (files) => {
                 });
             })
         }
-        //Subscribe to change of file
-        watch(file, _compile)
+        if (isWatch) {
+            //Subscribe to change of file
+            watch(file, _compile)
+        }
         //Start first compile    
         _compile();
         return {

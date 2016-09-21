@@ -3,17 +3,15 @@ var compile = require('./compile');
 module.exports = (file, addModule) => {
     var code = cellx();
     var deps = cellx();
-    var modules = cellx(() => {
-        return deps() ? createModules() : undefined;
-    })
+    var modules;
     var allDeps = cellx(() => {
-        console.log("aaa", modules() ? console.log(modules().length) || modules().map(m => console.log(m())) : null)
         //check if module was compiled and all dependencies also, then generate allDeps
-        return deps() && modules() && modules().every(m => m()) ?
-            Array.from(new Set(deps().concat([].concat.apply([], modules().map(m => m()))))) :
+        return deps() && modules && modules.every(m => m()) ?
+            Array.from(new Set(deps().concat([].concat.apply([], modules.map(m => m()))))) :
             void 0;
     });
     var writer = cellx(() => {
+        console.log("alldeps", allDeps())
         return allDeps() && code() ? write(file, code(), allDeps()) : void 0;
     });
     writer("subscribe", () => { });
@@ -25,18 +23,13 @@ module.exports = (file, addModule) => {
             setTimeout(function () {
                 code(code_);
                 deps(deps_);
+                modules = createModules();
             });
         })
     }
     function createModules() {
         return deps().map((dep) => {
-            var mod = addModule(dep);
-            return cellx((push) => {
-                mod.allDeps("subscribe", () => {
-                    console.log("subscribe")
-                    push(mod.allDeps())
-                });
-            });
+            return addModule(dep).allDeps;
         })
     }
     //Start first compile    
