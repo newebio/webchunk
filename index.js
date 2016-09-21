@@ -34,6 +34,9 @@ module.exports = (files) => {
         writer("subscribe", () => { });
         function _compile() {
             compile(file, (err, code_, deps_) => {
+                if (err) {
+                    throw err;
+                }
                 setTimeout(function () {
                     code(code_);
                     deps(deps_);
