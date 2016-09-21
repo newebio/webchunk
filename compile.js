@@ -29,7 +29,7 @@ module.exports = function (file, callback) {
                 }
             }]
         }).code;
-        callback(null, code);
+        callback(null, code, deps);
     }
     function resolve(t, args) {
         if (args[0].type !== "StringLiteral") {

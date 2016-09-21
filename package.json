@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/newebio/webchunk#readme",
   "dependencies": {
-    "async": "^2.0.1",
     "babel-core": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "cellx": "^1.6.46",

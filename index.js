@@ -25,7 +25,7 @@ module.exports = (files) => {
         var allDeps = cellx(() => {
             //check if module was compiled and all dependencies also, then generate allDeps
             return deps() && modules() && modules().every(m => m()) ?
-                deps().concat([].concat.apply([], modules().map(m => m()))) :
+                Array.from(new Set(deps().concat([].concat.apply([], modules().map(m => m()))))) :
                 void 0;
         });
         var writer = cellx(() => {
@@ -45,7 +45,7 @@ module.exports = (files) => {
         }
         function createModules() {
             return deps().map((dep) => {
-                var mod = addModule(dep.file);
+                var mod = addModule(dep);
                 return cellx(() => {
                     return mod.allDeps();
                 });

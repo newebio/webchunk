@@ -8,6 +8,7 @@ describe("Compile", () => {
         compile(f("entry", __dirname + "/fixtures/src/app1/index.js"), f("callback", jasmine.createSpy()));
         expect(f("callback").calls.count()).toBe(1);
         expect(f("callback").calls.argsFor(0)[0]).toBe(null);
+        expect(f("callback").calls.argsFor(0)[2]).toEqual([require.resolve('./fixtures/src/app1/inc1')]);
         var code = f("callback").calls.argsFor(0)[1];
         f("require", jasmine.createSpy()).and.callFake((req) => {
             switch (req) {
